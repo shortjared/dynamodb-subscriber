@@ -25,7 +25,12 @@ class DynamodDBSubscriber extends EventEmitter {
       this._interval = ms('10s');
     }
 
-    this._ddbStream = new aws.DynamoDBStreams({ region: params.region });
+    var streamParams = {
+      endpoint: params.endpoint,
+      region: params.region
+    };
+
+    this._ddbStream = new aws.DynamoDBStreams(streamParams);
   }
 
   _getOpenShards (callback) {
